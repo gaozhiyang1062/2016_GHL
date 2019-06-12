@@ -283,7 +283,7 @@ saver = tf.train.Saver()
 sess = tf.Session()
 saver.restore(sess, './'+name+'/model.ckpt')
 
-def is_my_face(image):
+def re_face(image):
     res = sess.run(predict, feed_dict={x: [image/255.0], keep_prob_5:1.0, keep_prob_75: 1.0})
     if res[0] == 1:
         return True
@@ -316,7 +316,7 @@ while True:
             face = img[x1:y1,x2:y2]
             # 调整图片的尺寸
             face = cv2.resize(face, (size,size))
-            print('Is this my face? %s' % is_my_face(face))
+            print(re_face(face))
     
             cv2.rectangle(img, (x2,x1),(y2,y1), (255,0,0),3)
             cv2.imshow('image',img)
